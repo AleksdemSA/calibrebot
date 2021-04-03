@@ -14,14 +14,14 @@ import (
 func SearchAuthor(database string, query string) string {
 
 	type Author struct {
-		id          int
-		name        string
-		author_sort string
+		id         int
+		name       string
+		authorSort string
 	}
 
 	var id int
 	var name string
-	var author_sort string
+	var authorSort string
 
 	db, err := sql.Open("sqlite3", database)
 	if err != nil {
@@ -30,7 +30,7 @@ func SearchAuthor(database string, query string) string {
 	defer db.Close()
 
 	// запрос к базе данных с поиском книг
-	rows, err := db.Query("select id,title,author_sort from main.books where author_sort LIKE '%" + query + "%'")
+	rows, err := db.Query("select id,title,authorSort from main.books where authorSort LIKE '%" + query + "%'")
 	if err != nil {
 		panic(err)
 	}
@@ -39,11 +39,11 @@ func SearchAuthor(database string, query string) string {
 	var authors []Author
 
 	for rows.Next() {
-		err := rows.Scan(&id, &name, &author_sort)
+		err := rows.Scan(&id, &name, &authorSort)
 		if err != nil {
 			log.Fatal(err)
 		}
-		authors = append(authors, Author{id, name, "\n" + author_sort + "\n------------------------\n"})
+		authors = append(authors, Author{id, name, "\n" + authorSort + "\n------------------------\n"})
 	}
 	str := strings.Replace(fmt.Sprint(authors), "} {", "\n/", -1)
 	str1 := strings.Replace(str, "[{", "Найдено:\n/", -1)
