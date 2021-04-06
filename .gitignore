@@ -2,4 +2,5 @@
 pkg
 bookbot
 metadata.db
+bin
 src/github.com
