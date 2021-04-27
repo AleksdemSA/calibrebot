@@ -50,7 +50,6 @@ func GetBook(database string, query string) string {
 	}
 	defer rows.Close()
 
-	// получаем формат книги
 	rows3, err := db.Query("select format from main.data where book=" + query)
 	if err != nil {
 		log.Fatal(err)
@@ -64,7 +63,6 @@ func GetBook(database string, query string) string {
 	}
 	defer rows.Close()
 
-	// объединяем всё это
 	return path1 + "/" + path2 + "." + strings.ToLower(path3)
 
 }

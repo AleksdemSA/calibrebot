@@ -49,5 +49,9 @@ func SearchBook(database string, query string) string {
 	str1 := strings.Replace(str, "[{", "Найдено:\n/", -1)
 	str2 := strings.Replace(str1, "}]", "\nНажми на номер для получения описания и скачивания", -1)
 	str3 := strings.Replace(str2, "[]", "По данному выражению ничего не найдено.", -1)
+	if len(str3) > 4096 {
+		str3 = "Слишком большой ответ, сервис не может передать это сообщение"
+	}
 	return str3
+
 }

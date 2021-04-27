@@ -21,7 +21,7 @@ func SearchAuthor(database string, query string) string {
 
 	var id int
 	var name string
-	var authorSort string
+	var author_sort string
 
 	db, err := sql.Open("sqlite3", database)
 	if err != nil {
@@ -30,7 +30,7 @@ func SearchAuthor(database string, query string) string {
 	defer db.Close()
 
 	// запрос к базе данных с поиском книг
-	rows, err := db.Query("select id,title,authorSort from main.books where authorSort LIKE '%" + query + "%'")
+	rows, err := db.Query("select id,title,author_sort from main.books where author_sort LIKE '%" + query + "%'")
 	if err != nil {
 		panic(err)
 	}
@@ -39,15 +39,18 @@ func SearchAuthor(database string, query string) string {
 	var authors []Author
 
 	for rows.Next() {
-		err := rows.Scan(&id, &name, &authorSort)
+		err := rows.Scan(&id, &name, &author_sort)
 		if err != nil {
 			log.Fatal(err)
 		}
-		authors = append(authors, Author{id, name, "\n" + authorSort + "\n------------------------\n"})
+		authors = append(authors, Author{id, name, "\n" + author_sort + "\n------------------------\n"})
 	}
 	str := strings.Replace(fmt.Sprint(authors), "} {", "\n/", -1)
 	str1 := strings.Replace(str, "[{", "Найдено:\n/", -1)
 	str2 := strings.Replace(str1, "}]", "\nНажми на номер для получения списка книг автора", -1)
 	str3 := strings.Replace(str2, "[]", "По данному выражению ничего не найдено.", -1)
+	if len(str3) > 4096 {
+		str3 = "Слишком большой ответ, сервис не может передать это сообщение"
+	}
 	return str3
 }
