@@ -36,6 +36,7 @@ After=network.target
 [Service]
 Type=simple
 User=root
+Restart=always
 WorkingDirectory=/PATH_TO_LIBRARY
 ExecStart=/PATH_TO_LIBRARY/bookbot TOKEN
 
