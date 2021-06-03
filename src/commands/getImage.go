@@ -8,7 +8,6 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-// GetImage возвращает путь к обложке книги, если она есть
 func GetImage(database string, query string) string {
 
 	var path1 string
@@ -19,7 +18,6 @@ func GetImage(database string, query string) string {
 	}
 	defer db.Close()
 
-	// получаем путь к папке с книгой
 	rows, err := db.Query("select path from main.books where id=" + query)
 	if err != nil {
 		log.Fatal(err)
@@ -33,7 +31,6 @@ func GetImage(database string, query string) string {
 	}
 	defer rows.Close()
 
-	//добавляем название картинки (оно одно и то же всегда) и возвращаем полный путь к картинке
 	return path1 + "/cover.jpg"
 
 }

@@ -9,7 +9,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-// GetBook возвращает путь к книге
+// GetBook return path to book
 func GetBook(database string, query string) string {
 
 	var path1 string
@@ -22,7 +22,6 @@ func GetBook(database string, query string) string {
 	}
 	defer db.Close()
 
-	// получаем папку автора книги
 	rows, err := db.Query("select path from main.books where id=" + query)
 	if err != nil {
 		log.Fatal(err)
@@ -36,7 +35,6 @@ func GetBook(database string, query string) string {
 	}
 	defer rows.Close()
 
-	// получаем путь к файлу без формата
 	rows2, err := db.Query("select name from main.data where book=" + query)
 	if err != nil {
 		log.Fatal(err)

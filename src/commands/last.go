@@ -10,7 +10,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-// LastBook выводит последние 20 добавленных книг.
+// LastBook
 func LastBook(database string) string {
 
 	type Book struct {
@@ -27,14 +27,12 @@ func LastBook(database string) string {
 	}
 	defer db.Close()
 
-	// выводим 20 последних книг
 	rows, err := db.Query("SELECT id,title FROM main.books ORDER BY id DESC LIMIT 20")
 	if err != nil {
 		panic(err)
 	}
 	defer rows.Close()
 
-	// парсим ответ базы данных
 	var books []Book
 
 	for rows.Next() {
@@ -46,7 +44,7 @@ func LastBook(database string) string {
 		books = append(books, Book{id, title})
 	}
 	str := strings.Replace(fmt.Sprint(books), "} {", "\n/", -1)
-	str1 := strings.Replace(str, "[{", "Найдено:\n/", -1)
-	str2 := strings.Replace(str1, "}]", "\n\nНажми на номер для получения описания и скачивания", -1)
+	str1 := strings.Replace(str, "[{", "Found:\n/", -1)
+	str2 := strings.Replace(str1, "}]", "\n\nPress to number for read description and download", -1)
 	return str2
 }

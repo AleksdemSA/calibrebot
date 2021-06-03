@@ -1,13 +1,11 @@
 //package with commands
 package commands
 
-// Help возвращает приветственное сообщение
 func Help() string {
-	return "Поиск по имени: /search или /s \n" +
-		"Поиск по автору: /author или /a \n" +
-		"Последние 20 книг: /last или /l \n" +
-		"Случайная книга: /r \n" +
-		"Статистика: /stat \n\n" +
-		"------------------------------------\n" +
-		"При открытии книг может быть небольшой таймаут из-за большого размера файла."
+	return "Search (book name): /search or /s \n" +
+		"Search (author name): /author or /a \n" +
+		"Last 20 books: /last or /l \n" +
+		"Random book: /r \n" +
+		"Statistics: /stat \n\n" +
+		"------------------------------------\n"
 }
