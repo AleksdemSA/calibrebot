@@ -8,7 +8,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-// Statistic выводит информацию о количестве книг
+// Statistic
 func Statistic(database string) string {
 
 	var rowsNum string
@@ -19,7 +19,6 @@ func Statistic(database string) string {
 	}
 	defer db.Close()
 
-	// запрос к базе данных, получаем номер последней строки в таблице книг
 	rows, err := db.Query("select ROW_NUMBER() OVER(ORDER BY Id) FROM main.books ORDER BY Id DESC LIMIT 1")
 	if err != nil {
 		panic(err)
@@ -32,7 +31,7 @@ func Statistic(database string) string {
 			log.Fatal(err)
 		}
 	}
-	textOfResp := "Всего книг: " + rowsNum
+	textOfResp := "Books: " + rowsNum
 
 	return textOfResp
 }

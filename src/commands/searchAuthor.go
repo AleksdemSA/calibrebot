@@ -10,7 +10,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-// SearchAuthor выводит список авторов. Опять же как и поиск книг, эта операция регистрозависима.
+// SearchAuthor
 func SearchAuthor(database string, query string) string {
 
 	type Author struct {
@@ -29,7 +29,6 @@ func SearchAuthor(database string, query string) string {
 	}
 	defer db.Close()
 
-	// запрос к базе данных с поиском книг
 	rows, err := db.Query("select id,title,author_sort from main.books where author_sort LIKE '%" + query + "%'")
 	if err != nil {
 		panic(err)
@@ -46,11 +45,11 @@ func SearchAuthor(database string, query string) string {
 		authors = append(authors, Author{id, name, "\n" + author_sort + "\n------------------------\n"})
 	}
 	str := strings.Replace(fmt.Sprint(authors), "} {", "\n/", -1)
-	str1 := strings.Replace(str, "[{", "Найдено:\n/", -1)
-	str2 := strings.Replace(str1, "}]", "\nНажми на номер для получения списка книг автора", -1)
-	str3 := strings.Replace(str2, "[]", "По данному выражению ничего не найдено.", -1)
+	str1 := strings.Replace(str, "[{", "Founded:\n/", -1)
+	str2 := strings.Replace(str1, "}]", "\nPress to number for list author's bookd", -1)
+	str3 := strings.Replace(str2, "[]", "Not found.", -1)
 	if len(str3) > 4096 {
-		str3 = "Слишком большой ответ, сервис не может передать это сообщение"
+		str3 = "Answer too big, messenger can's sent it"
 	}
 	return str3
 }

@@ -1,9 +1,8 @@
 # Calibre Bot
 
-Этот бот был создан в связи с тем, что моя библиотека находится локально, а книги я люблю читать и в дороге, а так же [Calibre](https://calibre-ebook.com) стала достаточно медленно работать. Поэтому, была взята библиотека за основу, а так же добавлен [бот](github.com/go-telegram-bot-api/telegram-bot-api) для получения книг через Telegram. Ну и пара статей как работать с Go, чтобы собрать это вместе.
+This telegram bot creted for [Calibre](https://calibre-ebook.com)
 
-
-## Сборка
+## Build
 
 ```
 go env -w GO111MODULE=auto
@@ -14,15 +13,16 @@ go build -o bookbot src/main.go
 ```
 
 
-## Использование
+## Run
 
-Нужно скопировать полученный bookbot в библиотеку, где находится файл metadata.db.
+Copy file bookbot in library (where the file metadata.db is located).
 
-Далее можно запустить вручную сервис, добавив токен бота
+You can run bot mannualy (with token!):
 ```
 ./buildbot TOKEN
 ```
-или можно оформить это в виде сервиса (Systemd Unit)
+
+or use system Systemd Unit
 
 ```
 vim /etc/systemd/system/bookbot.service
@@ -43,9 +43,9 @@ ExecStart=/PATH_TO_LIBRARY/bookbot TOKEN
 [Install]
 WantedBy=multi-user.target
 ```
-где нужно заменить PATH_TO_LIBRARY и TOKEN
+replace PATH_TO_LIBRARY and TOKEN
 
-После запуска в консоли или журнале вы увидите сообщение о том, что бот подключился:
+In journal (journalctl -f -u bookbot) you can see this:
 ```
 Authorized on account ...
 ```

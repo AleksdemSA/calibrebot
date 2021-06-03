@@ -10,7 +10,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-// RandBook выводит случайную книгу из библиотеки
+// RandBook
 func RandBook(database string) string {
 
 	type Book struct {
@@ -27,7 +27,6 @@ func RandBook(database string) string {
 	}
 	defer db.Close()
 
-	// выбираем случайную книгу из таблицы
 	rows, err := db.Query("SELECT id,title FROM main.books ORDER BY RANDOM() LIMIT 1")
 	if err != nil {
 		panic(err)
@@ -45,7 +44,7 @@ func RandBook(database string) string {
 		books = append(books, Book{id, title})
 	}
 	str := strings.Replace(fmt.Sprint(books), "} {", "\n/", -1)
-	str1 := strings.Replace(str, "[{", "Найдено:\n/", -1)
-	str2 := strings.Replace(str1, "}]", "\n\nНажми на номер для получения описания и скачивания", -1)
+	str1 := strings.Replace(str, "[{", "Founded:\n/", -1)
+	str2 := strings.Replace(str1, "}]", "\n\nPress to number for read description and download", -1)
 	return str2
 }

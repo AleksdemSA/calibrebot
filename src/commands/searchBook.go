@@ -10,8 +10,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-// SearchBook выводит список книг по поиску
-// К сожалению, пока не реализован регистронезависимый поиск
+// SearchBook
 func SearchBook(database string, query string) string {
 
 	type Book struct {
@@ -28,7 +27,6 @@ func SearchBook(database string, query string) string {
 	}
 	defer db.Close()
 
-	// запрос к базе данных с поиском книг
 	rows, err := db.Query("select id,title from main.books where title LIKE '%" + query + "%'")
 	if err != nil {
 		panic(err)
@@ -46,11 +44,11 @@ func SearchBook(database string, query string) string {
 		books = append(books, Book{id, title})
 	}
 	str := strings.Replace(fmt.Sprint(books), "} {", "\n/", -1)
-	str1 := strings.Replace(str, "[{", "Найдено:\n/", -1)
-	str2 := strings.Replace(str1, "}]", "\nНажми на номер для получения описания и скачивания", -1)
-	str3 := strings.Replace(str2, "[]", "По данному выражению ничего не найдено.", -1)
+	str1 := strings.Replace(str, "[{", "Founded:\n/", -1)
+	str2 := strings.Replace(str1, "}]", "\nPress to number for read description and download", -1)
+	str3 := strings.Replace(str2, "[]", "Not found.", -1)
 	if len(str3) > 4096 {
-		str3 = "Слишком большой ответ, сервис не может передать это сообщение"
+		str3 = "Answer too big, messenger can't sent it"
 	}
 	return str3
 
