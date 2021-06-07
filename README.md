@@ -19,7 +19,7 @@ Copy file bookbot in library (where the file metadata.db is located).
 
 You can run bot mannualy (with token!):
 ```
-./buildbot TOKEN
+./bookbot TOKEN
 ```
 
 or use system Systemd Unit
