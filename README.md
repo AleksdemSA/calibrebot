@@ -1,6 +1,6 @@
 # Calibre Bot
 
-This telegram bot creted for [Calibre](https://calibre-ebook.com)
+This telegram bot created for [Calibre](https://calibre-ebook.com)
 
 ## Build
 
