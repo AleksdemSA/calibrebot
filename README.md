@@ -2,20 +2,9 @@
 
 This telegram bot created for [Calibre](https://calibre-ebook.com)
 
-## Build
-
-```
-go env -w GO111MODULE=auto
-export GOPATH=$PWD
-go get github.com/go-telegram-bot-api/telegram-bot-api
-go get github.com/mattn/go-sqlite3
-go build -o bookbot src/main.go
-```
-
-
 ## Run
 
-Copy file bookbot in library (where the file metadata.db is located).
+Copy file bookbot from releases to library (where the file metadata.db is located).
 
 You can run bot mannualy (with token!):
 ```
@@ -44,6 +33,8 @@ ExecStart=/PATH_TO_LIBRARY/bookbot TOKEN
 WantedBy=multi-user.target
 ```
 replace PATH_TO_LIBRARY and TOKEN
+
+
 
 In journal (journalctl -f -u bookbot) you can see this:
 ```
