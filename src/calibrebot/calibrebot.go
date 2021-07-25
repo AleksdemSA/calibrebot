@@ -1,7 +1,7 @@
 package main
 
 import (
-	"commands"
+	"calibrebotCommands"
 	"fmt"
 	"log"
 	"os"
@@ -27,7 +27,7 @@ func main() {
 
 	bot.Debug = true
 	log.Printf("Authorized on account %s", bot.Self.UserName)
-	log.Printf("v.20210718")
+	log.Printf("v.20210725")
 
 	u := tgbotapi.NewUpdate(0)
 	u.Timeout = 60
@@ -51,36 +51,36 @@ func main() {
 			}
 
 			if i > 0 && i < 500000 {
-				msg.Text = commands.GetBookDescription(DB, update.Message.Command())
+				msg.Text = calibrebotCommands.GetBookDescription(DB, update.Message.Command())
 
-				imagePath := commands.GetImage(DB, update.Message.Command())
+				imagePath := calibrebotCommands.GetImage(DB, update.Message.Command())
 				photo := tgbotapi.NewPhotoUpload(update.Message.Chat.ID, imagePath)
 				bot.Send(photo)
 
-				bookPath := commands.GetBook(DB, update.Message.Command())
+				bookPath := calibrebotCommands.GetBook(DB, update.Message.Command())
 				book := tgbotapi.NewDocumentUpload(update.Message.Chat.ID, bookPath)
 				bot.Send(book)
 
 			} else {
 				switch update.Message.Command() {
 				case "author", "a":
-					msg.Text = commands.SearchAuthor(DB, update.Message.CommandArguments())
+					msg.Text = calibrebotCommands.SearchAuthor(DB, update.Message.CommandArguments())
 				case "help", "start", "h":
-					msg.Text = commands.Help()
+					msg.Text = calibrebotCommands.Help()
 				case "last", "l":
-					msg.Text = commands.LastBook(DB)
+					msg.Text = calibrebotCommands.LastBook(DB)
 				case "r":
-					msg.Text = commands.RandBook(DB)
+					msg.Text = calibrebotCommands.RandBook(DB)
 				case "search", "s":
 					if len(update.Message.CommandArguments()) < 3 {
 						msg.Text = "Enter more whan 3 symbols"
 					} else {
-						msg.Text = commands.SearchBook(DB, update.Message.CommandArguments())
+						msg.Text = calibrebotCommands.SearchBook(DB, update.Message.CommandArguments())
 					}
 				case "stat":
-					msg.Text = commands.Statistic(DB)
+					msg.Text = calibrebotCommands.Statistic(DB)
 				default:
-					msg.Text = "Commant not found, press /help"
+					msg.Text = "Command not found, press /help"
 				}
 			}
 

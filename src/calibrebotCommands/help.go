@@ -1,5 +1,4 @@
-//package with commands
-package commands
+package calibrebotCommands
 
 func Help() string {
 	return "Search (book name): /search or /s \n" +
