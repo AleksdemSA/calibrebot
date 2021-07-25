@@ -1,18 +1,17 @@
 # Calibre Bot
 
-This telegram bot created for [Calibre](https://calibre-ebook.com)
+This telegram bot created for [Calibre](https://calibre-ebook.com) for Linux and MacOS&
 
 ## Run
 
-Copy file bookbot from releases to library (where the file metadata.db is located).
+Copy file bookbot (or bookbot.mac for MacOS) from releases to library (where the file metadata.db is located).
 
 You can run bot mannualy (with token!):
 ```
 ./bookbot TOKEN
 ```
 
-or use system Systemd Unit
-
+or use system Systemd Unit (in Linux)
 ```
 vim /etc/systemd/system/bookbot.service
 ```
