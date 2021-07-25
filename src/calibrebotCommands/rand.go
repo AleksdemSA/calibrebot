@@ -43,7 +43,7 @@ func RandBook(database string) string {
 		books = append(books, Book{id, title})
 	}
 	str := strings.Replace(fmt.Sprint(books), "} {", "\n/", -1)
-	str1 := strings.Replace(str, "[{", "Founded:\n/", -1)
-	str2 := strings.Replace(str1, "}]", "\n\nPress to number for read description and download", -1)
-	return str2
+	str := strings.Replace(str, "[{", "Founded:\n/", -1)
+	str := strings.Replace(str, "}]", "\n\nPress to number for read description and download", -1)
+	return str
 }

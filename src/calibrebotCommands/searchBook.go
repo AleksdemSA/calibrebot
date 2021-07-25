@@ -43,12 +43,12 @@ func SearchBook(database string, query string) string {
 		books = append(books, Book{id, title})
 	}
 	str := strings.Replace(fmt.Sprint(books), "} {", "\n/", -1)
-	str1 := strings.Replace(str, "[{", "Founded:\n/", -1)
-	str2 := strings.Replace(str1, "}]", "\nPress to number for read description and download", -1)
-	str3 := strings.Replace(str2, "[]", "Not found.", -1)
-	if len(str3) > 4096 {
-		str3 = "Answer too big, messenger can't sent it"
+	str := strings.Replace(str, "[{", "Founded:\n/", -1)
+	str := strings.Replace(str, "}]", "\nPress to number for read description and download", -1)
+	str := strings.Replace(str, "[]", "Not found.", -1)
+	if len(str) > 4096 {
+		str = "Answer too big, messenger can't sent it"
 	}
-	return str3
+	return str
 
 }

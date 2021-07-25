@@ -44,11 +44,11 @@ func SearchAuthor(database string, query string) string {
 		authors = append(authors, Author{id, name, "\n" + author_sort + "\n------------------------\n"})
 	}
 	str := strings.Replace(fmt.Sprint(authors), "} {", "\n/", -1)
-	str1 := strings.Replace(str, "[{", "Founded:\n/", -1)
-	str2 := strings.Replace(str1, "}]", "\nPress to number for list author's bookd", -1)
-	str3 := strings.Replace(str2, "[]", "Not found.", -1)
-	if len(str3) > 4096 {
-		str3 = "Answer too big, messenger can's sent it"
+	str := strings.Replace(str, "[{", "Founded:\n/", -1)
+	str := strings.Replace(str, "}]", "\nPress to number for list author's bookd", -1)
+	str := strings.Replace(str, "[]", "Not found.", -1)
+	if len(str) > 4096 {
+		str = "Answer too big, messenger can's sent it"
 	}
-	return str3
+	return str
 }
