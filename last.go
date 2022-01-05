@@ -1,4 +1,4 @@
-package calibrebotCommands
+package main
 
 import (
 	"database/sql"
@@ -9,8 +9,8 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-// RandBook
-func RandBook(database string) string {
+// LastBook
+func LastBook(database string) string {
 
 	type Book struct {
 		id    int
@@ -26,7 +26,7 @@ func RandBook(database string) string {
 	}
 	defer db.Close()
 
-	rows, err := db.Query("SELECT id,title FROM main.books ORDER BY RANDOM() LIMIT 1")
+	rows, err := db.Query("SELECT id,title FROM main.books ORDER BY id DESC LIMIT 20")
 	if err != nil {
 		panic(err)
 	}
@@ -43,7 +43,7 @@ func RandBook(database string) string {
 		books = append(books, Book{id, title})
 	}
 	str := strings.Replace(fmt.Sprint(books), "} {", "\n/", -1)
-	str = strings.Replace(str, "[{", "Founded:\n/", -1)
+	str = strings.Replace(str, "[{", "Found:\n/", -1)
 	str = strings.Replace(str, "}]", "\n\nPress to number for read description and download", -1)
 	return str
 }

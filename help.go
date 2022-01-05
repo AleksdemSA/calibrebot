@@ -1,4 +1,4 @@
-package calibrebotCommands
+package main
 
 func Help() string {
 	return "Search (book name): /search or /s \n" +

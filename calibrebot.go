@@ -1,7 +1,7 @@
 package main
 
 import (
-	"calibrebotCommands"
+	//"calibrebotCommands"
 	"fmt"
 	"log"
 	"os"
@@ -10,15 +10,15 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
-var DB string = "metadata.db"
-var BotAPI string = os.Args[1]
-
 func main() {
 
 	if len(os.Args) != 2 {
 		fmt.Println("You need a token.")
 		os.Exit(0)
 	}
+
+	var DB string = "metadata.db"
+	var BotAPI string = os.Args[1]
 
 	bot, err := tgbotapi.NewBotAPI(BotAPI)
 	if err != nil {
@@ -51,34 +51,34 @@ func main() {
 			}
 
 			if i > 0 && i < 500000 {
-				msg.Text = calibrebotCommands.GetBookDescription(DB, update.Message.Command())
+				msg.Text = GetBookDescription(DB, update.Message.Command())
 
-				imagePath := calibrebotCommands.GetImage(DB, update.Message.Command())
+				imagePath := GetImage(DB, update.Message.Command())
 				photo := tgbotapi.NewPhotoUpload(update.Message.Chat.ID, imagePath)
 				bot.Send(photo)
 
-				bookPath := calibrebotCommands.GetBook(DB, update.Message.Command())
+				bookPath := GetBook(DB, update.Message.Command())
 				book := tgbotapi.NewDocumentUpload(update.Message.Chat.ID, bookPath)
 				bot.Send(book)
 
 			} else {
 				switch update.Message.Command() {
 				case "author", "a":
-					msg.Text = calibrebotCommands.SearchAuthor(DB, update.Message.CommandArguments())
+					msg.Text = SearchAuthor(DB, update.Message.CommandArguments())
 				case "help", "start", "h":
-					msg.Text = calibrebotCommands.Help()
+					msg.Text = Help()
 				case "last", "l":
-					msg.Text = calibrebotCommands.LastBook(DB)
+					msg.Text = LastBook(DB)
 				case "r":
-					msg.Text = calibrebotCommands.RandBook(DB)
+					msg.Text = RandBook(DB)
 				case "search", "s":
 					if len(update.Message.CommandArguments()) < 3 {
 						msg.Text = "Enter more whan 3 symbols"
 					} else {
-						msg.Text = calibrebotCommands.SearchBook(DB, update.Message.CommandArguments())
+						msg.Text = SearchBook(DB, update.Message.CommandArguments())
 					}
 				case "stat":
-					msg.Text = calibrebotCommands.Statistic(DB)
+					msg.Text = Statistic(DB)
 				default:
 					msg.Text = "Command not found, press /help"
 				}

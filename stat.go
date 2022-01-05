@@ -1,4 +1,4 @@
-package calibrebotCommands
+package main
 
 import (
 	"database/sql"
