@@ -7,7 +7,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func GetImage(database string, query string) string {
+func GetImage(database string, query string, path string) string {
 
 	var path1 string
 
@@ -30,6 +30,6 @@ func GetImage(database string, query string) string {
 	}
 	defer rows.Close()
 
-	return path1 + "/cover.jpg"
+	return path + path1 + "/cover.jpg"
 
 }

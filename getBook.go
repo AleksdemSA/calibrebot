@@ -9,7 +9,7 @@ import (
 )
 
 // GetBook return path to book
-func GetBook(database string, query string) string {
+func GetBook(database string, query string, path string) string {
 
 	var path1 string
 	var path2 string
@@ -60,6 +60,6 @@ func GetBook(database string, query string) string {
 	}
 	defer rows.Close()
 
-	return path1 + "/" + path2 + "." + strings.ToLower(path3)
+	return path + path1 + "/" + path2 + "." + strings.ToLower(path3)
 
 }

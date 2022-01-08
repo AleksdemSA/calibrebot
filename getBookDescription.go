@@ -8,7 +8,7 @@ import (
 )
 
 // GetBookDescription return book description
-func GetBookDescription(database string, query string) string {
+func GetBookDescription(database string, query string, path string) string {
 
 	var description string = "description not found"
 	var text, format, title string

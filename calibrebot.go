@@ -12,12 +12,19 @@ import (
 
 func main() {
 
-	if len(os.Args) != 2 {
+	if len(os.Args) < 2 {
 		fmt.Println("You need a token.")
 		os.Exit(0)
 	}
 
 	var DB string = "metadata.db"
+	var path string
+
+	if len (os.Args) == 3 {
+		path = os.Args[2]
+		DB = path + "/metadata.db"
+	}
+
 	var BotAPI string = os.Args[1]
 
 	bot, err := tgbotapi.NewBotAPI(BotAPI)
@@ -51,13 +58,13 @@ func main() {
 			}
 
 			if i > 0 && i < 500000 {
-				msg.Text = GetBookDescription(DB, update.Message.Command())
+				msg.Text = GetBookDescription(DB, update.Message.Command(), path)
 
-				imagePath := GetImage(DB, update.Message.Command())
+				imagePath := GetImage(DB, update.Message.Command(), path)
 				photo := tgbotapi.NewPhotoUpload(update.Message.Chat.ID, imagePath)
 				bot.Send(photo)
 
-				bookPath := GetBook(DB, update.Message.Command())
+				bookPath := GetBook(DB, update.Message.Command(), path)
 				book := tgbotapi.NewDocumentUpload(update.Message.Chat.ID, bookPath)
 				bot.Send(book)
 
