@@ -20,7 +20,7 @@ func main() {
 	var DB string = "metadata.db"
 	var path string
 
-	if len (os.Args) == 3 {
+	if len(os.Args) == 3 {
 		path = os.Args[2]
 		DB = path + "/metadata.db"
 	}
@@ -39,7 +39,7 @@ func main() {
 	u := tgbotapi.NewUpdate(0)
 	u.Timeout = 60
 
-	updates, err := bot.GetUpdatesChan(u)
+	updates, _ := bot.GetUpdatesChan(u)
 
 	for update := range updates {
 		if update.Message == nil {
@@ -70,22 +70,16 @@ func main() {
 
 			} else {
 				switch update.Message.Command() {
-				case "author", "a":
-					msg.Text = SearchAuthor(DB, update.Message.CommandArguments())
 				case "help", "start", "h":
 					msg.Text = Help()
 				case "last", "l":
 					msg.Text = LastBook(DB)
-				case "r":
-					msg.Text = RandBook(DB)
 				case "search", "s":
 					if len(update.Message.CommandArguments()) < 3 {
 						msg.Text = "Enter more whan 3 symbols"
 					} else {
 						msg.Text = SearchBook(DB, update.Message.CommandArguments())
 					}
-				case "stat":
-					msg.Text = Statistic(DB)
 				default:
 					msg.Text = "Command not found, press /help"
 				}
